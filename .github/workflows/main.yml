@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Log into docker
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login --username 1mill --password-stdin
+        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login --username 1mill --password-stdin
       - run: docker build . --file Dockerfile --tag tmp-image
       - run: docker tag tmp-image 1mill/terraform-sops:latest
       - run: docker push 1mill/terraform-sops:latest
