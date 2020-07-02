@@ -13,14 +13,11 @@ jobs:
     if: endsWith(github.ref, 'master') == true
     needs: [test]
     runs-on: ubuntu-latest
-    env:
-      VERSION: date +%Y-%m-%d_%H-%M-%S
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${VERSION}
-      - run: docker build . --file Dockerfile --tag ${VERSION}
-      # - name: Log into registry
-      #   run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+      - run: docker build . --file Dockerfile
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       # - name: Push image
       #   run: |
