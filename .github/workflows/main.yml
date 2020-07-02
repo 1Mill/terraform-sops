@@ -1,20 +1,6 @@
-name: Docker
+name: CI
 
-on:
-  push:
-    # Publish `master` as Docker `latest` image.
-    branches:
-      - master
-
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - v*
-
-  # Run tests for any PRs.
-  pull_request:
-
-env:
-  IMAGE_NAME: terraform-sops
+on: [push]
 
 jobs:
   test:
@@ -31,8 +17,8 @@ jobs:
       VERSION: date +%Y-%m-%d_%H-%M-%S
     steps:
       - uses: actions/checkout@v2
-      - run: docker bild . --file Dockerfile --tag ${VERSION}
       - run: echo ${VERSION}
+      - run: docker build . --file Dockerfile --tag ${VERSION}
       # - name: Log into registry
       #   run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
