@@ -3,21 +3,24 @@ name: CI
 on: [push]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: docker build . --file Dockerfile
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - run: docker build . --file Dockerfile
 
   deploy-to-production:
     if: endsWith(github.ref, 'master') == true
-    needs: [test]
+    # needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: docker build . --file Dockerfile
-      - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+      - name: Log into docker
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login --username ${{ github.actor }} --password-stdin
+      - run: docker build . --file Dockerfile --tag tmp-image
+      - run: docker tag tmp-image 1mill/terraform-sops:latest
+      - run: docker push 1mill/terraform-sops:latest
+
 
       # - name: Push image
       #   run: |
