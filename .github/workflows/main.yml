@@ -2,6 +2,9 @@ name: CI
 
 on: [push]
 
+env:
+  VERSION: ${{ `date +%Y-%m-%d_%H-%M-%S` }}
+
 jobs:
   # test:
   #   runs-on: ubuntu-latest
@@ -14,16 +17,15 @@ jobs:
     # needs: [test]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Log into Docker Hub
-        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login --username 1mill --password-stdin
-      - name: Build image
-        run: docker build . --file Dockerfile --tag tmp-image
-      - name: Generate version number
-        run: VERSION=`date +%Y-%m-%d_%H-%M-%S`
-      - name: Tag image
-        run: docker tag tmp-image 1mill/terraform-sops:${VERSION}
-      - name: Deploy image - versioned
-        run: docker push 1mill/terraform-sops:${VERSION}
-      - name: Deploy image - latest
-        run: docker push 1mill/terraform-sops:latest
+      - run: echo ${VERSION}
+      # - uses: actions/checkout@v2
+      # - name: Log into Docker Hub
+      #   run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login --username 1mill --password-stdin
+      # - name: Build image
+      #   run: docker build . --file Dockerfile --tag tmp-image
+      # - name: Tag image
+      #   run: docker tag tmp-image 1mill/terraform-sops:${VERSION}
+      # - name: Deploy image - versioned
+      #   run: docker push 1mill/terraform-sops:${VERSION}
+      # - name: Deploy image - latest
+      #   run: docker push 1mill/terraform-sops:latest
