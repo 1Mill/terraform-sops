@@ -2,9 +2,6 @@ name: CI
 
 on: [push]
 
-env:
-  VERSION: $(`date +%Y-%m-%d_%H-%M-%S`)
-
 jobs:
   # test:
   #   runs-on: ubuntu-latest
@@ -17,8 +14,11 @@ jobs:
     # needs: [test]
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${VERSION}
-      # - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - run: bash ./ci-deploy.bash
+        env:
+          PASSWORD: "${{ secrets.DOCKERHUB_PASSWORD }}"
+          USERNAME: 1mill
       # - name: Log into Docker Hub
       #   run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login --username 1mill --password-stdin
       # - name: Build image
