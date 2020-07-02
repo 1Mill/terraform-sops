@@ -14,7 +14,7 @@ on:
   pull_request:
 
 env:
-  IMAGE_NAME: 1mill/terraform-sops
+  IMAGE_NAME: terraform-sops
 
 jobs:
   # Run tests.
