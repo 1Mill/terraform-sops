@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo "::set-env name=VERSION::$(date +'%Y-%m-%dT%H-%M-%S')"
+      - run: echo "::set-env name=VERSION::alpine-$(date +'%Y-%m-%dT%H-%M-%S')"
       - run: echo "${PASSWORD}" | docker login --username ${USERNAME} --password-stdin
       - run: docker build . --file Dockerfile --tag temp-image
       - run: docker tag temp-image ${USERNAME}/${IMAGENAME}:${VERSION}

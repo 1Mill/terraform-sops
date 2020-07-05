@@ -1,6 +1,8 @@
-FROM ubuntu:20.04
+FROM alpine:3
 
-RUN apt-get update && apt-get install --yes unzip wget
+RUN apk update && apk add \
+	unzip \
+	wget
 
 # Install terraform
 ARG TERRAFORM_VERSION=0.12.28
@@ -15,7 +17,7 @@ RUN mkdir ~/.terraform.d && mkdir ~/.terraform.d/plugins
 RUN unzip /tmp/sops.zip -d ~/.terraform.d/plugins
 RUN rm /tmp/sops.zip
 
-RUN apt-get remove --purge --yes unzip wget
+RUN apk del unzip wget
 
 WORKDIR /app
 
