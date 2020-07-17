@@ -28,4 +28,4 @@ ENV \
 	AWS_PROFILE=${AWS_PROFILE} \
 	AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
-CMD [ "echo", "-- Finished --" ]
+CMD [ "terraform", "--version" ]
