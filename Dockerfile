@@ -12,8 +12,8 @@ RUN unzip /tmp/terraform.zip -d /usr/local/bin/
 RUN rm /tmp/terraform.zip
 
 # Install SOPS terraform provider plugin
-ARG SOPS_PLUGIN_VERSION=0.5.1
-RUN wget -O /tmp/sops.zip https://github.com/carlpett/terraform-provider-sops/releases/download/v0.5.1/terraform-provider-sops_${SOPS_PLUGIN_VERSION}_linux_386.zip
+ARG SOPS_PLUGIN_VERSION=0.5.2
+RUN wget -O /tmp/sops.zip https://github.com/carlpett/terraform-provider-sops/releases/download/v${SOPS_PLUGIN_VERSION}/terraform-provider-sops_${SOPS_PLUGIN_VERSION}_linux_386.zip
 RUN mkdir -p ~/.terraform.d/plugins/linux_386
 RUN unzip /tmp/sops.zip -d ~/.terraform.d/plugins/linux_386
 RUN rm /tmp/sops.zip
