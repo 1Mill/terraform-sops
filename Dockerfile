@@ -18,7 +18,9 @@ RUN mkdir -p ~/.terraform.d/plugins/linux_386
 RUN unzip /tmp/sops.zip -d ~/.terraform.d/plugins/linux_386
 RUN rm /tmp/sops.zip
 
-RUN apk del unzip wget
+RUN apk del \
+	unzip \
+	wget
 
 WORKDIR /app
 
