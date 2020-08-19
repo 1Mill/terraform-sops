@@ -9,7 +9,7 @@ RUN apk add --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
 	'docker-compose>=1.26.2-r0'
 
 # Install terraform
-ARG TERRAFORM_VERSION=0.13.0
+ARG TERRAFORM_VERSION=0.12.29
 RUN wget -O /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_386.zip
 RUN unzip /tmp/terraform.zip -d /usr/local/bin/
 RUN rm /tmp/terraform.zip
