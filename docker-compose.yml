@@ -6,10 +6,6 @@ services:
       args:
         TERRAFORM_VERSION: 0.13.2
       context: .
-    environment:
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_PROFILE: ${AWS_PROFILE}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     image: 1mill/terraform-sops:${VERSION-development}
     volumes:
       - ./:/app
