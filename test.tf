@@ -1,5 +1,13 @@
+terraform {
+	required_providers {
+		sops = {
+			source  = "registry.terraform.io/carlpett/sops"
+		}
+	}
+}
+
 provider "sops" {
-	version = "~> 0.5.1"
+	version = "~> 0.5.2"
 }
 
 data "sops_file" "default" {
